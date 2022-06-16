@@ -1,0 +1,61 @@
+<div class="py-2 space-y-4 container mx-auto relative border-2 border-dashed bg-gradient-to-r bg-slate-100/75">
+  <div>
+    <h1 class="text-center text-6xl font-medium text-cyan-500 hover:text-blue-500" > Быки и коровы</h1>
+  </div>
+  <hr>
+  <app-login (changeNickname)="logNickname($event)"> </app-login>
+  <hr>
+
+  <div class="p-5 grid grid-cols-2 gap-8 text-2xl">
+    <div class="grid grid-cols-2 gap-8"> 
+      <div class="">
+        <div *ngIf="!isActive">
+          <button  class="px-4  py-2 font-semibold text-sm bg-cyan-500 hover:bg-blue-500 text-white rounded-full shadow-sm" 
+          (click)="startGame()">
+            Играть</button>
+        </div>
+        
+        <h1 class="underline decoration-cyan-500" *ngIf="isActive && gameDifficulty == 1"> <span>Всего времени: {{maxTime}} минут</span> </h1>
+        <h1 class="underline decoration-cyan-500" *ngIf="isActive && gameDifficulty == 2"> <span >Всего попыток: {{totalAttempts}}</span> </h1>
+        <h1 *ngIf="isActive"> <span>Прошло: {{time}}</span> </h1>
+        <h1 *ngIf="gameDifficulty==2 && isActive">Попыток осталось: {{15 - attempts}}</h1>
+        <div class="flex" *ngIf="isActive">
+          
+          <div class="space-x-2 flex ">
+            <label class="my-4" for="answer"> Число:</label>
+            <input  class="w-16 bg-slate-100/75" name="answer" [(ngModel)] = "shot" type="text" placeholder="9999"> 
+          </div>
+
+          <div class="flex mx-2">
+            <button class="px-4 my-4 py-2 font-semibold text-sm bg-cyan-500  hover:bg-blue-500 text-white rounded-full shadow-sm" (click)="checkShot()">
+              Проверка 
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class=" ">
+        <div>
+          <label class="underline decoration-cyan-500"> Ответ:</label>
+        </div>
+        <div class="py-2">
+          <label> {{answer}}</label>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="block">
+      <label class="underline decoration-cyan-500"> Ваши ходы:</label>
+      <div *ngFor="let step of steps; let i = index">
+          <p>
+          {{i+1}}) {{step}}     :     {{answers[i]}}
+          </p>
+        </div>  
+
+    </div>
+  </div>
+
+
+</div>
